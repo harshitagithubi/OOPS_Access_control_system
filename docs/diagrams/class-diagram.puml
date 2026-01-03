@@ -1,0 +1,80 @@
+@startuml Access Control System
+
+' Enums
+enum Action {
+    READ
+    WRITE
+    UPDATE
+    DELETE
+    APPROVE
+}
+
+enum ResourceType {
+    DOCUMENT
+    REPORT
+    USER_DATA
+    SYSTEM_CONFIG
+}
+
+' Core Classes
+class User {
+    -String id
+    -String name
+    -Set<Role> roles
+    +getId(): String
+    +getRoles(): Set<Role>
+}
+
+class Role {
+    -String name
+    -Set<Permission> permissions
+    +getName(): String
+    +getPermissions(): Set<Permission>
+}
+
+class Permission {
+    -Action action
+    -ResourceType resourceType
+    +getAction(): Action
+    +getResourceType(): ResourceType
+}
+
+abstract class Resource {
+    -String id
+    -ResourceType type
+    +getId(): String
+    +getType(): ResourceType
+}
+
+class Document extends Resource
+class Report extends Resource
+
+' Interfaces
+interface AccessPolicy {
+    +authorize(User, Action, Resource): boolean
+}
+
+class RoleBasedAccessPolicy implements AccessPolicy {
+    +authorize(User, Action, Resource): boolean
+}
+
+' Services
+class AccessManager {
+    -AccessPolicy policy
+    -AuditLogger auditLogger
+    +requestAccess(User, Action, Resource): void
+}
+
+interface AuditLogger {
+    +logAccess(User, Action, Resource, AccessResult): void
+}
+
+' Relationships
+User "1" *-- "many" Role
+Role "1" *-- "many" Permission
+Permission "1" -- "1" Action
+Permission "1" -- "1" ResourceType
+AccessManager "1" --> "1" AccessPolicy
+AccessManager "1" --> "1" AuditLogger
+
+@enduml
