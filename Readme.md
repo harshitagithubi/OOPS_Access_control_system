@@ -11,10 +11,6 @@ This project implements a comprehensive **Role-Based Access Control (RBAC)** sys
 - Comprehensive audit logging
 - Extensible and scalable design
 
-## 🏗️ Architecture
-
-![Class Diagram](docs/diagrams/class-diagram.png)
-
 ## 💡 OOPS Concepts Demonstrated
 
 ### Encapsulation
