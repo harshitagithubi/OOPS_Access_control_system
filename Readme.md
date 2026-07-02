@@ -35,14 +35,6 @@ This project implements a comprehensive **Role-Based Access Control (RBAC)** sys
 - Role HAS-A Set of Permissions
 - AccessManager HAS-A AccessPolicy and AuditLogger
 
-## 🔧 Design Patterns Used
-
-| Pattern | Implementation | Purpose |
-|---------|---------------|---------|
-| **Strategy** | `AccessPolicy` interface | Interchangeable authorization algorithms |
-| **Dependency Injection** | `AccessManager` constructor | Loose coupling, testability |
-| **Factory** | Resource creation | Centralized object creation |
-| **Observer** | Audit logging | Event notification |
 
 ## 📦 Package Structure
 ```
